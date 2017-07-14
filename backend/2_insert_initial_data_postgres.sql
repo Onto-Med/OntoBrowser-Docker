@@ -1,0 +1,271 @@
+-- Copyright 2015 Novartis Institutes for Biomedical Research
+-- 
+-- Licensed under the Apache License, Version 2.0 (the "License");
+-- you may not use this file except in compliance with the License.
+-- You may obtain a copy of the License at
+-- 
+--     http://www.apache.org/licenses/LICENSE-2.0
+-- 
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
+
+INSERT INTO CURATOR (
+  CURATOR_ID, 
+  USERNAME, 
+  IS_ACTIVE, 
+  CREATED_BY) 
+VALUES (
+  nextval('PRIMARY_KEY_SEQ'), 
+  'SYSTEM', 
+  TRUE, 
+  currval('PRIMARY_KEY_SEQ'));
+ 
+INSERT INTO VERSION (
+  VERSION_ID, 
+  CREATED_BY)
+VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'));
+  
+INSERT INTO RELATIONSHIP_TYPE (
+  RELATIONSHIP_TYPE_ID,
+  RELATIONSHIP_TYPE,
+  DEFINTION,
+  IS_CYCLIC,
+  IS_SYMMETRIC,
+  IS_TRANSITIVE,
+  EDGE_COLOUR,
+  STATUS,
+  CREATED_BY,
+  CREATED_VERSION_ID,
+  APPROVED_VERSION_ID
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'is_a',
+  'Subclassing relationship between one term and another',
+  FALSE,
+  FALSE,
+  TRUE,
+  '#29477F',
+  'APPROVED',
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'),
+  (SELECT MAX(VERSION_ID) FROM VERSION),
+  (SELECT MAX(VERSION_ID) FROM VERSION));
+ 
+INSERT INTO RELATIONSHIP_TYPE (
+  RELATIONSHIP_TYPE_ID,
+  RELATIONSHIP_TYPE,
+  DEFINTION,
+  IS_CYCLIC,
+  IS_SYMMETRIC,
+  IS_TRANSITIVE,
+  STATUS,
+  CREATED_BY,
+  CREATED_VERSION_ID,
+  APPROVED_VERSION_ID
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'union_of',
+  'Represents the union of several other terms',
+  FALSE,
+  FALSE,
+  FALSE,
+  'APPROVED',
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'),
+  (SELECT MAX(VERSION_ID) FROM VERSION),
+  (SELECT MAX(VERSION_ID) FROM VERSION));
+  
+INSERT INTO RELATIONSHIP_TYPE (
+  RELATIONSHIP_TYPE_ID,
+  RELATIONSHIP_TYPE,
+  DEFINTION,
+  IS_CYCLIC,
+  IS_SYMMETRIC,
+  IS_TRANSITIVE,
+  STATUS,
+  CREATED_BY,
+  CREATED_VERSION_ID,
+  APPROVED_VERSION_ID
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'disjoint_from',
+  'Terms have no instances or subclasses in common',
+  FALSE,
+  TRUE,
+  FALSE,
+  'APPROVED',
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'),
+  (SELECT MAX(VERSION_ID) FROM VERSION),
+  (SELECT MAX(VERSION_ID) FROM VERSION));
+
+INSERT INTO RELATIONSHIP_TYPE (
+  RELATIONSHIP_TYPE_ID,
+  RELATIONSHIP_TYPE,
+  DEFINTION,
+  IS_CYCLIC,
+  IS_SYMMETRIC,
+  IS_TRANSITIVE,
+  EDGE_COLOUR,
+  STATUS,
+  CREATED_BY,
+  CREATED_VERSION_ID,
+  APPROVED_VERSION_ID
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'part_of',
+  'Subpart relationship between one term and another',
+  FALSE,
+  FALSE,
+  TRUE,
+  '#923222',
+  'APPROVED',
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'),
+  (SELECT MAX(VERSION_ID) FROM VERSION),
+  (SELECT MAX(VERSION_ID) FROM VERSION));
+  
+INSERT INTO RELATIONSHIP_TYPE (
+  RELATIONSHIP_TYPE_ID,
+  RELATIONSHIP_TYPE,
+  DEFINTION,
+  IS_CYCLIC,
+  IS_SYMMETRIC,
+  IS_TRANSITIVE,
+  EDGE_COLOUR,
+  STATUS,
+  CREATED_BY,
+  CREATED_VERSION_ID,
+  APPROVED_VERSION_ID
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'develops_from',
+  'Anatomical structures change through development',
+  FALSE,
+  FALSE,
+  TRUE,
+  '#329222',
+  'APPROVED',
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'),
+  (SELECT MAX(VERSION_ID) FROM VERSION),
+  (SELECT MAX(VERSION_ID) FROM VERSION));  
+
+INSERT INTO DATASOURCE (
+  DATASOURCE_ID,
+  DATASOURCE_NAME,
+  DATASOURCE_ACRONYM,
+  DATASOURCE_URI,
+  IS_INTERNAL,
+  IS_PUBLIC,
+  CREATED_BY
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'Clinical Data Interchange Standards Consortium',
+  'CDISC',
+  'http://www.cdisc.org',
+  FALSE,
+  TRUE,
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'));
+  
+INSERT INTO DATASOURCE (
+  DATASOURCE_ID,
+  DATASOURCE_NAME,
+  DATASOURCE_ACRONYM,
+  DATASOURCE_URI,
+  IS_INTERNAL,
+  IS_PUBLIC,
+  CREATED_BY
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'Standard for Exchange of Nonclinical Data',
+  'SEND',
+  'http://www.cdisc.org/send',
+  FALSE,
+  TRUE,
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'));
+  
+INSERT INTO DATASOURCE (
+  DATASOURCE_ID,
+  DATASOURCE_NAME,
+  DATASOURCE_ACRONYM,
+  DATASOURCE_URI,
+  IS_INTERNAL,
+  IS_PUBLIC,
+  CREATED_BY
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'National Cancer Institution Thesaurus',
+  'NCI',
+  'http://ncit.nci.nih.gov',
+  FALSE,
+  TRUE,
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'));
+
+INSERT INTO DATASOURCE (
+  DATASOURCE_ID,
+  DATASOURCE_NAME,
+  DATASOURCE_ACRONYM,
+  DATASOURCE_URI,
+  IS_INTERNAL,
+  IS_PUBLIC,
+  CREATED_BY
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'Medical Dictionary for Regulatory Activities',
+  'MedDRA',
+  'http://www.meddramsso.com',
+  FALSE,
+  TRUE,
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'));
+  
+INSERT INTO DATASOURCE (
+  DATASOURCE_ID,
+  DATASOURCE_NAME,
+  DATASOURCE_ACRONYM,
+  DATASOURCE_URI,
+  IS_INTERNAL,
+  IS_PUBLIC,
+  CREATED_BY
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'International Harmonization of Nomenclature and Diagnostic',
+  'INHAND',
+  'http://www.toxpath.org/inhand.asp',
+  FALSE,
+  TRUE,
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'));
+
+INSERT INTO DATASOURCE (
+  DATASOURCE_ID,
+  DATASOURCE_NAME,
+  DATASOURCE_ACRONYM,
+  DATASOURCE_URI,
+  IS_INTERNAL,
+  IS_PUBLIC,
+  CREATED_BY
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'Medical Subject Headings',
+  'MeSH',
+  'http://www.nlm.nih.gov/mesh/',
+  FALSE,
+  TRUE,
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'));
+
+INSERT INTO DATASOURCE (
+  DATASOURCE_ID,
+  DATASOURCE_NAME,
+  DATASOURCE_ACRONYM,
+  DATASOURCE_URI,
+  IS_INTERNAL,
+  IS_PUBLIC,
+  CREATED_BY
+) VALUES (
+  nextval('PRIMARY_KEY_SEQ'),
+  'Systematized Nomenclature of Medicine',
+  'SNOMED',
+  'http://www.ihtsdo.org/snomed-ct',
+  FALSE,
+  TRUE,
+  (SELECT CURATOR_ID FROM CURATOR WHERE USERNAME='SYSTEM'));
