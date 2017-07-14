@@ -1,5 +1,5 @@
 # OntoBrowser-Docker
-Dockorized OntoBrowser
+Dockorized [OntoBrowser](https://github.com/Novartis/ontobrowser)
 
 # Deployment
 ```sh
