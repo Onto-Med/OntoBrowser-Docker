@@ -7,13 +7,5 @@ services:
     build: frontend
     restart: always
     ports:
-      - '8086:8080'
-      - '9991:9990'
-networks:
-  default:
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.23.13.0/24
-          ip_range: 172.23.13.0/24
-          gateway: 172.23.13.254
+      - '8080:8080'
+      - '9990:9990'
