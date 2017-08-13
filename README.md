@@ -8,7 +8,7 @@ Dockorized [OntoBrowser](https://github.com/Novartis/ontobrowser)
 
 After starting the containers, the webapplication is running at http://localhost:8080/ontobrowser
 
-# Upload Example OBO FIle
+# Upload Example OBO File
 ```sh
 > curl -s -S -O -L http://purl.obolibrary.org/obo/ma.obo
 > curl -s -S -H "Content-Type: application/obo;charset=utf-8" -X PUT --data-binary "@ma.obo" -u SYSTEM "http://localhost:8080/ontobrowser/ontologies/Mouse%20adult%20gross%20anatomy"
