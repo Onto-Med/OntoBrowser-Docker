@@ -3,6 +3,8 @@ services:
   backend:
     build: backend
     restart: always
+    volumes:
+      - ontobrowser-data:/var/lib/postgresql/data
     env_file:
       - docker-compose.env
 
@@ -12,5 +14,8 @@ services:
     env_file:
       - docker-compose.env
     ports:
-      - '8080:8080'
-      - '9990:9990'
+      - 8080:8080
+      - 9990:9990
+
+volumes:
+  ontobrowser-data:
