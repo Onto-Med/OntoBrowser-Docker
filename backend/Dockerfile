@@ -1,4 +1,4 @@
-FROM postgres:9
+FROM postgres:10
 
 ENV POSTGRES_DB ontobrowser
 
