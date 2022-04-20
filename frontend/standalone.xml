@@ -158,8 +158,8 @@
                         <prefill>true</prefill>
                     </pool>
                     <security>
-                        <user-name>ontobrowser</user-name>
-                        <password>ontobrowser</password>
+                        <user-name>${env.POSTGRES_USER}</user-name>
+                        <password>${env.POSTGRES_PASSWORD}</password>
                     </security>
                     <validation>
                         <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>

@@ -1,11 +1,16 @@
-version: '2'
+version: '3'
 services:
   backend:
     build: backend
     restart: always
+    env_file:
+      - docker-compose.env
+
   frontend:
     build: frontend
     restart: always
+    env_file:
+      - docker-compose.env
     ports:
       - '8080:8080'
       - '9990:9990'
