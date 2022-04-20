@@ -151,7 +151,7 @@
                 </drivers>
                 <datasource jndi-name="java:jboss/datasources/ontobrowser" pool-name="ontobrowser">
                     <connection-url>jdbc:postgresql://backend:5432/ontobrowser</connection-url>
-                    <driver>postgresql-42.1.1.jar</driver>
+                    <driver>postgresql.jar</driver>
                     <pool>
                         <min-pool-size>1</min-pool-size>
                         <max-pool-size>8</max-pool-size>

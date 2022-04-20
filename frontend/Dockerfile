@@ -28,7 +28,7 @@ RUN curl -s -S -O -L https://github.com/Novartis/ontobrowser/archive/master.zip 
     && chown jboss deployments/ontobrowser.war
 
 USER jboss
-RUN wget https://jdbc.postgresql.org/download/postgresql-42.1.1.jar -O deployments/postgresql-42.1.1.jar
+RUN wget https://jdbc.postgresql.org/download/postgresql-42.3.4.jar --no-check-certificate -O deployments/postgresql.jar
 COPY standalone.xml configuration/
 
 EXPOSE 9990 8080
