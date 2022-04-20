@@ -2,7 +2,7 @@ version: '3'
 services:
   backend:
     build: backend
-    restart: always
+    restart: unless-stopped
     volumes:
       - ontobrowser-data:/var/lib/postgresql/data
     env_file:
@@ -10,7 +10,7 @@ services:
 
   frontend:
     build: frontend
-    restart: always
+    restart: unless-stopped
     env_file:
       - docker-compose.env
     ports:
