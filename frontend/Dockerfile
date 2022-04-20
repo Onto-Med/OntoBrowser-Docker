@@ -16,15 +16,16 @@ RUN wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-mave
 
 
 # compile ontobrowser.war
-RUN curl -s -S -O -L https://github.com/Novartis/ontobrowser/archive/master.zip \
-    && unzip master.zip \
-    && cd ontobrowser-master \
+RUN curl -s -S -L https://github.com/Novartis/ontobrowser/archive/a0703f485ced29b73e3439bff674d3fa76f1f448.zip -o master.zip \
+    && unzip -qq master.zip \
+    && mv ontobrowser-* ontobrowser \
+    && cd ontobrowser \
     && sed -i 's/return username/return "SYSTEM"/g' src/main/java/com/novartis/pcs/ontology/rest/servlet/OntologiesServlet.java \
     && sed -i 's/Oracle10gDialect/PostgreSQLDialect/g' src/main/resources/META-INF/persistence.xml \
     && mvn package \
     && cd .. \
-    && cp ontobrowser-master/target/ontobrowser.war deployments/ \
-    && rm ontobrowser-master master.zip -rf \
+    && cp ontobrowser/target/ontobrowser.war deployments/ \
+    && rm ontobrowser master.zip -rf \
     && chown jboss deployments/ontobrowser.war
 
 USER jboss
