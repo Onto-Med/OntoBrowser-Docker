@@ -11,6 +11,15 @@ docker-compose up --build -d
 
 After starting the containers, the web application is running at http://localhost:8080/ontobrowser
 
+## Connect to an existing PostgreSQL DB
+In case you already have a running database, you can modify the environment variables `POSTGRES_HOST`, `POSTGRES_DB`, and `POSTGRES_PORT` in `docker-compose.env` accordingly.
+The variables default to the values given in `docker-compose.env.tpl`.
+You may also need to modify the `pg_hba.conf` file of your PostgreSQL database (see https://www.postgresql.org/docs/current/auth-pg-hba-conf.html).
+
+Use the sql files in the [backend](backend) folder to initialize the database.
+
+It may be reasonable to strip the unused backend service from the `docker-compose.yml` file.
+
 # Upload Example OBO File
 ```sh
 curl -s -S -O -L http://purl.obolibrary.org/obo/ma.obo
