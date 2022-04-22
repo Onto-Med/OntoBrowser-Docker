@@ -18,7 +18,7 @@ You may also need to modify the `pg_hba.conf` file of your PostgreSQL database (
 
 Use the sql files in the [backend](backend) folder to initialize the database.
 
-It may be reasonable to strip the unused backend service from the `docker-compose.yml` file.
+It may be reasonable to strike the unused backend service from the `docker-compose.yml` file.
 
 # Upload Example OBO File
 ```sh
